@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TPTModelStoreContainer" CdmEntityContainer="TPTEntities">
+    <EntitySetMapping Name="Sentients">
+      <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Sentient)">
+        <MappingFragment StoreEntitySet="Sentient">
+          <ScalarProperty Name="AllegianceID" ColumnName="AllegianceID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Droid)">
+        <MappingFragment StoreEntitySet="Droid">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DroidType" ColumnName="DroidType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Jedi)">
+        <MappingFragment StoreEntitySet="Jedi">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LightsaberColor" ColumnName="LightsaberColor" />
+          <ScalarProperty Name="MidichlorianCount" ColumnName="MidichlorianCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Other)">
+        <MappingFragment StoreEntitySet="Other">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsMale" ColumnName="IsMale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Allegiances">
+      <EntityTypeMapping TypeName="TPTModel.Allegiance">
+        <MappingFragment StoreEntitySet="Allegiance">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

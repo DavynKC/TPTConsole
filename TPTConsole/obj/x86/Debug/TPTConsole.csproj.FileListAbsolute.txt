@@ -1,0 +1,8 @@
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\bin\Debug\TPTConsole.exe.config
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\bin\Debug\TPTConsole.exe
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\bin\Debug\TPTConsole.pdb
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\bin\Debug\Dapper.dll
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\bin\Debug\Dapper.pdb
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\obj\x86\Debug\TPTConsole.exe
+C:\Users\Adam\Documents\Projects\Adam\TPTConsole\TPTConsole\obj\x86\Debug\TPTConsole.pdb

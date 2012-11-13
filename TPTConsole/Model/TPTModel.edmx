@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TPTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TPTModelStoreContainer">
+          <EntitySet Name="Allegiance" EntityType="TPTModel.Store.Allegiance" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Droid" EntityType="TPTModel.Store.Droid" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Jedi" EntityType="TPTModel.Store.Jedi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Other" EntityType="TPTModel.Store.Other" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sentient" EntityType="TPTModel.Store.Sentient" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Droid_Id" Association="TPTModel.Store.FK_Droid_Id">
+            <End Role="Sentient" EntitySet="Sentient" />
+            <End Role="Droid" EntitySet="Droid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jedi_Id" Association="TPTModel.Store.FK_Jedi_Id">
+            <End Role="Sentient" EntitySet="Sentient" />
+            <End Role="Jedi" EntitySet="Jedi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Other_ID" Association="TPTModel.Store.FK_Other_ID">
+            <End Role="Sentient" EntitySet="Sentient" />
+            <End Role="Other" EntitySet="Other" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sentient_AllegianceID" Association="TPTModel.Store.FK_Sentient_AllegianceID">
+            <End Role="Allegiance" EntitySet="Allegiance" />
+            <End Role="Sentient" EntitySet="Sentient" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Allegiance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Droid">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DroidType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Jedi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="LightsaberColor" Type="varchar" MaxLength="50" />
+          <Property Name="MidichlorianCount" Type="int" />
+        </EntityType>
+        <EntityType Name="Other">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="IsMale" Type="bit" />
+        </EntityType>
+        <EntityType Name="Sentient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="AllegianceID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Droid_Id">
+          <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="1" />
+          <End Role="Droid" Type="TPTModel.Store.Droid" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sentient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Droid">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jedi_Id">
+          <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="1" />
+          <End Role="Jedi" Type="TPTModel.Store.Jedi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sentient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jedi">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Other_ID">
+          <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="1" />
+          <End Role="Other" Type="TPTModel.Store.Other" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sentient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Other">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sentient_AllegianceID">
+          <End Role="Allegiance" Type="TPTModel.Store.Allegiance" Multiplicity="0..1" />
+          <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allegiance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sentient">
+              <PropertyRef Name="AllegianceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Sentient_Select_TPT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TPTModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TPTEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Sentients" EntityType="TPTModel.Sentient" />
+          <EntitySet Name="Allegiances" EntityType="TPTModel.Allegiance" />
+          <AssociationSet Name="FK_Sentient_AllegianceID" Association="TPTModel.FK_Sentient_AllegianceID">
+            <End Role="Allegiance" EntitySet="Allegiances" />
+            <End Role="Sentient" EntitySet="Sentients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Droid" BaseType="TPTModel.Sentient">
+          <Property Type="String" Name="DroidType" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Jedi" BaseType="TPTModel.Sentient">
+          <Property Type="String" Name="LightsaberColor" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="MidichlorianCount" />
+        </EntityType>
+        <EntityType Name="Other" BaseType="TPTModel.Sentient">
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsMale" />
+        </EntityType>
+        <EntityType Name="Sentient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="AllegianceID" />
+          <NavigationProperty Name="Allegiance" Relationship="TPTModel.FK_Sentient_AllegianceID" FromRole="Sentient" ToRole="Allegiance" />
+        </EntityType>
+        <EntityType Name="Allegiance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sentients" Relationship="TPTModel.FK_Sentient_AllegianceID" FromRole="Allegiance" ToRole="Sentient" />
+        </EntityType>
+        <Association Name="FK_Sentient_AllegianceID">
+          <End Type="TPTModel.Allegiance" Role="Allegiance" Multiplicity="0..1" />
+          <End Type="TPTModel.Sentient" Role="Sentient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allegiance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sentient">
+              <PropertyRef Name="AllegianceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TPTModelStoreContainer" CdmEntityContainer="TPTEntities">
+          <EntitySetMapping Name="Sentients">
+            <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Sentient)">
+              <MappingFragment StoreEntitySet="Sentient">
+                <ScalarProperty Name="AllegianceID" ColumnName="AllegianceID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Droid)">
+              <MappingFragment StoreEntitySet="Droid">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DroidType" ColumnName="DroidType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Jedi)">
+              <MappingFragment StoreEntitySet="Jedi">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LightsaberColor" ColumnName="LightsaberColor" />
+                <ScalarProperty Name="MidichlorianCount" ColumnName="MidichlorianCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TPTModel.Other)">
+              <MappingFragment StoreEntitySet="Other">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsMale" ColumnName="IsMale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Allegiances">
+            <EntityTypeMapping TypeName="TPTModel.Allegiance">
+              <MappingFragment StoreEntitySet="Allegiance">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TPTModel">
+        <EntityTypeShape EntityType="TPTModel.Droid" Width="1.5" PointX="3" PointY="1.125" Height="1.211080729166667" />
+        <EntityTypeShape EntityType="TPTModel.Jedi" Width="1.5" PointX="3" PointY="3.5" Height="1.4033821614583326" />
+        <EntityTypeShape EntityType="TPTModel.Other" Width="1.5" PointX="3" PointY="6" Height="1.4033821614583326" />
+        <EntityTypeShape EntityType="TPTModel.Sentient" Width="1.5" PointX="0.75" PointY="3.5" Height="1.9802864583333388" />
+        <InheritanceConnector EntityType="TPTModel.Droid" >
+          <ConnectorPoint PointX="1.5" PointY="3.5" />
+          <ConnectorPoint PointX="1.5" PointY="2.711080729166667" />
+          <ConnectorPoint PointX="3.75" PointY="2.711080729166667" />
+          <ConnectorPoint PointX="3.75" PointY="2.336080729166667" />
+        </InheritanceConnector>
+        <InheritanceConnector EntityType="TPTModel.Jedi" >
+          <ConnectorPoint PointX="2.25" PointY="4.1335513430247151" />
+          <ConnectorPoint PointX="2.625" PointY="4.1335513430247151" />
+          <ConnectorPoint PointX="2.625" PointY="4.2016910807291659" />
+          <ConnectorPoint PointX="3" PointY="4.2016910807291659" />
+        </InheritanceConnector>
+        <InheritanceConnector EntityType="TPTModel.Other" >
+          <ConnectorPoint PointX="1.5" PointY="5.2879850260416683" />
+          <ConnectorPoint PointX="1.5" PointY="5.625" />
+          <ConnectorPoint PointX="3.75" PointY="5.625" />
+          <ConnectorPoint PointX="3.75" PointY="6" />
+        </InheritanceConnector>
+        <EntityTypeShape EntityType="TPTModel.Allegiance" Width="1.5" PointX="0.5" PointY="0.5" Height="1.5956835937499996" />
+        <AssociationConnector Association="TPTModel.FK_Sentient_AllegianceID" >
+          <ConnectorPoint PointX="1.0625" PointY="2.0956835937499996" />
+          <ConnectorPoint PointX="1.0625" PointY="3.5" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

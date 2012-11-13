@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TPTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TPTModelStoreContainer">
+    <EntitySet Name="Allegiance" EntityType="TPTModel.Store.Allegiance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Droid" EntityType="TPTModel.Store.Droid" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Jedi" EntityType="TPTModel.Store.Jedi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Other" EntityType="TPTModel.Store.Other" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sentient" EntityType="TPTModel.Store.Sentient" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Droid_Id" Association="TPTModel.Store.FK_Droid_Id">
+      <End Role="Sentient" EntitySet="Sentient" />
+      <End Role="Droid" EntitySet="Droid" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jedi_Id" Association="TPTModel.Store.FK_Jedi_Id">
+      <End Role="Sentient" EntitySet="Sentient" />
+      <End Role="Jedi" EntitySet="Jedi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Other_ID" Association="TPTModel.Store.FK_Other_ID">
+      <End Role="Sentient" EntitySet="Sentient" />
+      <End Role="Other" EntitySet="Other" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sentient_AllegianceID" Association="TPTModel.Store.FK_Sentient_AllegianceID">
+      <End Role="Allegiance" EntitySet="Allegiance" />
+      <End Role="Sentient" EntitySet="Sentient" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Allegiance">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Droid">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="DroidType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Jedi">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="LightsaberColor" Type="varchar" MaxLength="50" />
+    <Property Name="MidichlorianCount" Type="int" />
+  </EntityType>
+  <EntityType Name="Other">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="IsMale" Type="bit" />
+  </EntityType>
+  <EntityType Name="Sentient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="AllegianceID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Droid_Id">
+    <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="1" />
+    <End Role="Droid" Type="TPTModel.Store.Droid" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sentient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Droid">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jedi_Id">
+    <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="1" />
+    <End Role="Jedi" Type="TPTModel.Store.Jedi" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sentient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Jedi">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Other_ID">
+    <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="1" />
+    <End Role="Other" Type="TPTModel.Store.Other" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sentient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Other">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sentient_AllegianceID">
+    <End Role="Allegiance" Type="TPTModel.Store.Allegiance" Multiplicity="0..1" />
+    <End Role="Sentient" Type="TPTModel.Store.Sentient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Allegiance">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Sentient">
+        <PropertyRef Name="AllegianceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Sentient_Select_TPT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+</Schema>
